@@ -115,6 +115,12 @@ module.exports = function(grunt) {
     'uglify',
     'version'
   ]);
+  grunt.registerTask('setup', [
+    'clean',
+    'sass',
+    'uglify',
+    'version'
+  ]);
   grunt.registerTask('dev', [
     'watch'
   ]);
