@@ -53,15 +53,17 @@ add_action('wp_head', 'roots_jquery_local_fallback');
 
 function roots_google_analytics() { ?>
 <script>
-  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-  e.src='//www.google-analytics.com/analytics.js';
-  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-  ga('create','<?php echo GOOGLE_ANALYTICS_ID; ?>');ga('send','pageview');
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<?php echo GOOGLE_ANALYTICS_ID; ?>']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
 </script>
 
 <?php }
 if (GOOGLE_ANALYTICS_ID && !current_user_can('manage_options')) {
-  add_action('wp_footer', 'roots_google_analytics', 20);
+  add_action('wp_head', 'roots_google_analytics', 20);
 }
