@@ -21,5 +21,9 @@ function roots_setup() {
 
   // Tell the TinyMCE editor to use a custom stylesheet
   add_editor_style('/assets/css/editor-style.css');
+
+  // Remove "Hello world" post and comment.
+  wp_delete_post(1, TRUE);
+  wp_delete_comment(1);
 }
 add_action('after_setup_theme', 'roots_setup');
